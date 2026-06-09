@@ -2,6 +2,7 @@ Giải thích chức năng của từng thư mục / file
 - assets/: Nơi chứa các tài nguyên tĩnh không thay đổi.
 
     + images/: Chứa các ảnh tĩnh như logo, banner quảng cáo. (Ảnh sản phẩm có thể để ở đây hoặc dùng link URL ngoài cho nhẹ dự án).
+    + icons/: Chứa các icon dùng đến
 
 - components/: Trái tim của dự án, chứa các mảnh ghép UI có thể tái sử dụng.
 
@@ -20,7 +21,7 @@ Ví dụ: File mockProducts.js chứa một mảng các object mô phỏng dữ 
 Ví dụ: useCart.js (để lấy dữ liệu giỏ hàng), hoặc useInfiniteScroll.js (xử lý logic khi cuộn trang).
 
 - layouts/: Chứa các "bộ khung" của trang.
-Ví dụ: MainLayout.jsx sẽ bao gồm Header, phần nội dung động (dùng <Outlet /> của react-router-dom) và Footer.
+Ví dụ: MainLayout.jsx sẽ bao gồm Header, phần nội dung động (dùng Outlet của react-router-dom) và Footer.
 
 - pages/: Các trang chính của website. Mỗi file đại diện cho một màn hình.
 
