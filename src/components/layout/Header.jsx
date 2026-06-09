@@ -3,14 +3,14 @@ import CartIcon from "@/assets/icons/CartIcon";
 import UserIcon from "@/assets/icons/UserIcon";
 import BellIcon from "@/assets/icons/BellIcon";
 import SearchIcon from "@/assets/icons/SearchIcon";
+import { publicRoutes } from "@/routes";
 
-const navItems = [
-    { to: "/", label: "Trang chủ", end: true },
-    { to: "/ao", label: "Áo" },
-    { to: "/quan", label: "Quần" },
-    { to: "/phu-kien", label: "Phụ kiện" },
-    { to: "/bo-suu-tap-moi", label: "Bộ sưu tập mới" },
-];
+const navItems = publicRoutes
+    .filter((route) => route.path !== "/")
+    .map((route) => ({
+        to: route.path,
+        label: route.label,
+    }));
 
 export default function Header() {
     const linkClass = ({ isActive }) =>
@@ -34,13 +34,11 @@ export default function Header() {
                 </div>
 
                 <nav className="hidden items-center gap-8 lg:flex">
+                    <NavLink to="/" className={linkClass}>
+                        Trang chủ
+                    </NavLink>
                     {navItems.map((item) => (
-                        <NavLink
-                            key={item.to}
-                            to={item.to}
-                            end={item.end}
-                            className={linkClass}
-                        >
+                        <NavLink key={item.to} to={item.to} className={linkClass}>
                             {item.label}
                         </NavLink>
                     ))}
@@ -56,11 +54,7 @@ export default function Header() {
                         />
                     </div>
 
-                    <button className="lg:hidden">
-                        {/* <Search className="h-6 w-6 text-zinc-800" /> */}
-                    </button>
-
-                    <button className="hover">
+                    <button>
                         <CartIcon />
                     </button>
                     <button>

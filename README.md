@@ -33,6 +33,8 @@ Ví dụ: MainLayout.jsx sẽ bao gồm Header, phần nội dung động (dùng
 
     + Cart.jsx: Trang giỏ hàng.
 
+- routes/: Nơi định tuyến các trang
+
 - utils/: Các hàm hỗ trợ dùng chung.
 Ví dụ: formatCurrency.js (hàm biến số 150000 thành 150.000đ).
 
