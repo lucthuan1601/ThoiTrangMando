@@ -4,7 +4,8 @@ import { publicRoutes } from "@/routes";
 
 export default function App() {
     return (
-        <Routes>
+        <div>
+                    <Routes>
             {publicRoutes.map((route, index) => {
                 const Page = route.component;
                 const Layout = MainLayout;
@@ -22,6 +23,9 @@ export default function App() {
                     />
                 );
             })}
-        </Routes>
+        </Routes> 
+        </div>
+
     );
+    
 }
