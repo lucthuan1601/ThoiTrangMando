@@ -111,6 +111,11 @@ export const SHIRTS = [
         image: AosomiImg,
         tag: "PREMIUM",
         isPremiumBadge: true,
+        colors: [
+            { name: "Trắng", hex: "#ffffff" },
+            { name: "Xanh", hex: "#0772dd" },
+            { name: "Xám", hex: "#333437" },
+        ],
         category: "ao"
     },
     {

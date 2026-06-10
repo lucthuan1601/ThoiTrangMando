@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function formatMoney(value) {
+    if (!value) return "";
     return value.toLocaleString("vi-VN") + "đ";
 }
 
@@ -107,8 +108,36 @@ export default function ProductDetailPage() {
     };
 
     const handleBuyNow = () => {
-        navigate("/checkout");
-    };
+    if (!selectedColor || !selectedSize) {
+        showWarning("Vui lòng chọn màu sắc và kích cỡ sản phẩm!");
+        return;
+    }
+
+    if (quantity < 1) {
+        showWarning("Số lượng phải lớn hơn 0!");
+        return;
+    }
+
+    const checkoutItem = [
+    {
+        productId: product.id,
+        name: product.name,
+        price: product.price,
+        image: activeImage,
+        color: selectedColor.name,
+        size: selectedSize.name,
+        quantity,
+        selected: true,
+    },
+];
+
+    localStorage.setItem(
+        "mando_checkout",
+        JSON.stringify(checkoutItem)
+    );
+
+    navigate("/checkout");
+};
 
     return (
         <div className="mx-auto min-h-screen max-w-7xl px-6 py-10 xl:px-10">
