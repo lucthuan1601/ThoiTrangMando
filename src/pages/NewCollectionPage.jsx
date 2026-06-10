@@ -5,6 +5,7 @@
 // export default NewCollectionPage;
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // Import mảng NEW_COLLECTION vừa được tạo từ file dữ liệu
 import { NEW_COLLECTION } from "@/data/product"; 
 
@@ -102,7 +103,7 @@ function NewCollectionPage() {
                         {/* Lưới hiển thị danh sách sản phẩm Lookbook (3 cột) */}
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12">
                             {NEW_COLLECTION.map((product) => (
-                                <div key={product.id} className="group flex flex-col">
+                                <Link to={`/product/${product.id}`} key={product.id} className="group flex flex-col">
                                     
                                     {/* Khung ảnh sản phẩm thời trang cao cấp */}
                                     <div className="relative overflow-hidden bg-[#f9f9f9] h-[430px]">
@@ -148,7 +149,7 @@ function NewCollectionPage() {
                                         </button>
                                     </div>
 
-                                </div>
+                                </Link>
                             ))}
                         </div>
 

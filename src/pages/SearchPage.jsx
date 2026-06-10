@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { PRODUCTS } from "@/data/product"; // Import danh sách tổng tất cả sản phẩm của dự án
+import { useSearchParams, Link } from "react-router-dom";
+import { PRODUCTS } from "@/data/product";
 
 export default function SearchPage() {
     const [searchParams] = useSearchParams();
@@ -202,7 +202,7 @@ export default function SearchPage() {
                                     {/* Lưới sản phẩm đề xuất */}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12">
                                         {recommendedProducts.map((product) => (
-                                            <div key={product.id} className="group flex flex-col">
+                                            <Link to={`/product/${product.id}`} key={product.id} className="group flex flex-col">
                                                 <div className="relative overflow-hidden bg-[#f9f9f9] flex items-center justify-center h-[380px]">
                                                     <img
                                                         src={product.image}
@@ -226,7 +226,7 @@ export default function SearchPage() {
                                                         Xem chi tiết
                                                     </button>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         ))}
                                     </div>
                                 </div>
@@ -237,7 +237,7 @@ export default function SearchPage() {
                             /* TRƯỜNG HỢP: CÓ SẢN PHẨM -> HIỂN THỊ KẾT QUẢ THEO GRID CHUẨN MANDO */
                             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12">
                                 {filteredProducts.map((product) => (
-                                    <div key={product.id} className="group flex flex-col">
+                                    <Link to={`/product/${product.id}`} key={product.id} className="group flex flex-col">
                                         
                                         {/* Hình ảnh */}
                                         <div className="relative overflow-hidden bg-[#f9f9f9] flex items-center justify-center h-[380px]">
@@ -273,7 +273,7 @@ export default function SearchPage() {
                                             </button>
                                         </div>
 
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                         )}

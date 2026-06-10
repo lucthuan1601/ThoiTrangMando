@@ -5,6 +5,7 @@
 // export default AccessoriesPage;
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ACCESSORIES } from "@/data/product"; 
 
 function AccessoriesPage() {
@@ -88,7 +89,7 @@ function AccessoriesPage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12">
                             {ACCESSORIES.map((product) => (
-                                <div key={product.id} className="group flex flex-col">
+                                <Link to={`/product/${product.id}`} key={product.id} className="group flex flex-col">
                                     
                                     {/* Khung ảnh phụ kiện bo vuông sạch sẽ */}
                                     <div className="relative overflow-hidden bg-[#f9f9f9] flex items-center justify-center h-[430px]">
@@ -130,7 +131,7 @@ function AccessoriesPage() {
                                         </button>
                                     </div>
 
-                                </div>
+                                </Link>
                             ))}
                         </div>
 

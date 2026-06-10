@@ -5,6 +5,7 @@
 // export default ShirtPage;
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // Đổi từ NEW_ARRIVALS sang SHIRTS để lấy đúng danh sách áo sơ mi nhóm bạn cấu hình
 import { SHIRTS } from "@/data/product"; 
 
@@ -109,7 +110,7 @@ function ShirtPage() {
                         {/* Lưới hiển thị danh sách áo */}
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12">
                             {SHIRTS.map((product) => (
-                                <div key={product.id} className="group flex flex-col">
+                                <Link to={`/product/${product.id}`} key={product.id} className="group flex flex-col">
                                     
                                     {/* Khung ảnh sản phẩm */}
                                     <div className="relative overflow-hidden bg-[#f9f9f9]">
@@ -156,7 +157,7 @@ function ShirtPage() {
                                         </button>
                                     </div>
 
-                                </div>
+                                </Link>
                             ))}
                         </div>
 

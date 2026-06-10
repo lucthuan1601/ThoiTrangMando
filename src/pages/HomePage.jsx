@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CATEGORIES, NEW_ARRIVALS } from "@/data/product";
 import BackgroundDoTayImg from "@/assets/images/BackgroundDotay.png";
 
@@ -46,9 +47,9 @@ function HomePage() {
                                 {CATEGORIES[0].label}
                             </h2>
 
-                            <button className="mt-2 border-b border-black text-sm font-semibold">
+                            <Link to={CATEGORIES[0].to} className="mt-2 border-b border-black text-sm font-semibold inline-block">
                                 KHÁM PHÁ
-                            </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -65,9 +66,9 @@ function HomePage() {
                                 {CATEGORIES[1].label}
                             </h2>
 
-                            <button className="mt-2 border-b border-black text-sm font-semibold">
+                            <Link to={CATEGORIES[1].to} className="mt-2 border-b border-black text-sm font-semibold inline-block">
                                 KHÁM PHÁ
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -77,9 +78,9 @@ function HomePage() {
                     <div>
                         <h2 className="text-5xl font-bold">Phụ kiện</h2>
 
-                        <button className="mt-2 border-b border-black text-sm font-semibold">
+                        <Link to={CATEGORIES[2].to} className="mt-2 border-b border-black text-sm font-semibold inline-block">
                             XEM TẤT CẢ
-                        </button>
+                        </Link>
                     </div>
 
                     <div className="flex gap-6">
@@ -115,7 +116,7 @@ function HomePage() {
 
                 <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
                     {NEW_ARRIVALS.map((product) => (
-                        <div key={product.id}>
+                        <Link to={`/product/${product.id}`} key={product.id} className="block group">
                             <div className="relative overflow-hidden bg-white">
                                 {product.badge && (
                                     <span className="absolute left-3 top-3 bg-pink-600 px-2 py-1 text-xs font-bold text-white">
@@ -131,7 +132,7 @@ function HomePage() {
                             </div>
 
                             <div className="mt-4">
-                                <h3 className="text-lg font-semibold">
+                                <h3 className="text-lg font-semibold group-hover:text-zinc-600 transition-colors">
                                     {product.name}
                                 </h3>
 
@@ -156,7 +157,7 @@ function HomePage() {
                                     )}
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>

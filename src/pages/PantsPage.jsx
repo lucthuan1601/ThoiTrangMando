@@ -5,6 +5,7 @@
 // export default PantsPage;
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // Import mảng PANTS vừa tạo từ file data
 import { PANTS } from "@/data/product"; 
 
@@ -102,7 +103,7 @@ function PantsPage() {
                         {/* Lưới hiển thị danh sách Quần (3 cột trên màn lớn) */}
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12">
                             {PANTS.map((product) => (
-                                <div key={product.id} className="group flex flex-col">
+                                <Link to={`/product/${product.id}`} key={product.id} className="group flex flex-col">
                                     
                                     {/* Khung ảnh sản phẩm */}
                                     <div className="relative overflow-hidden bg-[#f9f9f9]">
@@ -148,7 +149,7 @@ function PantsPage() {
                                         </button>
                                     </div>
 
-                                </div>
+                                </Link>
                             ))}
                         </div>
 
