@@ -5,12 +5,15 @@ import "./index.css";
 import App from "./App.jsx";
 import { CartProvider } from "./context/CartContext";
 
+// Quân thêm
+import { OrderProvider } from "./context/OrderContext";
+
 createRoot(document.getElementById("root")).render(
-    <BrowserRouter>
-        <StrictMode>
-            <CartProvider>
-                <App />
-            </CartProvider>
-        </StrictMode>
-    </BrowserRouter>
+  <BrowserRouter>
+    <StrictMode>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </StrictMode>
+  </BrowserRouter>,
 );
