@@ -1,60 +1,48 @@
-// src/context/CartContext.jsx
-import React, { createContext, useContext, useState } from "react";
-import { initialCart } from "../data/mockCart";
+import { createContext, useMemo, useState } from "react";
 
-const CartContext = createContext();
+const CartContext = createContext(null);
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(initialCart);
-  // Lưu thông tin voucher đang được áp dụng (nếu có)
-  const [appliedVoucher, setAppliedVoucher] = useState(null);
+function CartProvider({ children }) {
+    const [cartItems, setCartItems] = useState([]);
 
-  const updateQuantity = (id, delta) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) => {
-        if (item.id === id) {
-          const newQty = item.quantity + delta;
-          return newQty > 0 ? { ...item, quantity: newQty } : item;
-        }
-        return item;
-      }),
+    const addToCart = (item) => {
+        setCartItems((prev) => {
+            const existed = prev.find(
+                (x) =>
+                    x.productId === item.productId &&
+                    x.color === item.color &&
+                    x.size === item.size,
+            );
+
+            if (!existed) {
+                return [...prev, item];
+            }
+
+            return prev.map((x) =>
+                x.productId === item.productId &&
+                x.color === item.color &&
+                x.size === item.size
+                    ? { ...x, quantity: x.quantity + item.quantity }
+                    : x,
+            );
+        });
+    };
+
+    const cartCount = useMemo(() => {
+        return cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    }, [cartItems]);
+
+    const value = useMemo(
+        () => ({
+            cartItems,
+            cartCount,
+            addToCart,
+        }),
+        [cartItems, cartCount],
     );
-  };
 
-  const removeItem = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
+    return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+}
 
-  const totalItemsCount = cartItems.reduce(
-    (acc, item) => acc + item.quantity,
-    0,
-  );
-  const cartSubtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
-
-  // LOGIC TÍNH TỔNG TIỀN SAU GIẢM GIÁ
-  const discountAmount = appliedVoucher ? appliedVoucher.discount : 0;
-  // Tổng cộng cuối cùng = Tạm tính - Số tiền giảm (Nếu tổng âm thì gán bằng 0)
-  const cartTotal = Math.max(0, cartSubtotal - discountAmount);
-
-  return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        updateQuantity,
-        removeItem,
-        totalItemsCount,
-        cartSubtotal,
-        cartTotal, // Tổng tiền cuối cùng sau giảm giá
-        appliedVoucher, // Voucher hiện tại đang dùng
-        setAppliedVoucher, // Hàm để kích hoạt voucher
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
-};
-
-export const useCart = () => useContext(CartContext);
+export default CartContext;
+export { CartProvider };
