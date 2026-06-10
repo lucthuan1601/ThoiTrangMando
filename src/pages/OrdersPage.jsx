@@ -1,5 +1,6 @@
 // src/pages/OrdersPage.jsx
 import React, { useState } from "react";
+import CancelOrderModal from "@/components/specific/CancelOrderModal";
 
 const sidebarStyle = {
   width: 220,
@@ -90,6 +91,7 @@ const suggestedProducts = [
 const OrdersPage = () => {
   const [activeTab, setActiveTab] = useState("Tất cả");
   const [currentPage, setCurrentPage] = useState(1);
+  const [showCancelModal, setShowCancelModal] = useState(false);
   const totalPages = 3;
 
   return (
@@ -326,6 +328,7 @@ const OrdersPage = () => {
                     fontWeight: 500,
                     whiteSpace: "nowrap",
                   }}
+                  onClick={() => setShowCancelModal(true)}
                 >
                   Huỷ đơn hàng
                 </button>
@@ -333,6 +336,10 @@ const OrdersPage = () => {
             </div>
           ))}
         </div>
+
+        {showCancelModal && (
+          <CancelOrderModal onClose={() => setShowCancelModal(false)} />
+        )}
 
         {/* Pagination */}
         <div
