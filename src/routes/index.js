@@ -18,7 +18,8 @@ const publicRoutes = [
     { path: '/pants', component: PantsPage, label: 'Quần' },
     { path: '/accessories', component: AccessoriesPage, label: 'Phụ kiện' },
     { path: '/new-collection', component: NewCollectionPage, label: 'Bộ sưu tập mới' },
-
+    { path: '/cart', component: Cart},
+    { path: '/checkout', component: CheckOut},
     // Lục thuận thêm phần này
     {
         path: "/search",

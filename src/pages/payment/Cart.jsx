@@ -1,39 +1,65 @@
 import { useState, useEffect } from "react";
-// 1. Import useNavigate từ react-router-dom
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
-const INITIAL_PRODUCTS = [
-  { id: 1, name: "Áo Thun Premium Mando", price: 300000, size: "L", color: "Đen", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=150" },
-  { id: 2, name: "Quần Khaki Slimfit Mando", price: 450000, size: "XL", color: "Be", image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=150" }
-];
-
-export default function Cart() { // Bỏ prop onNavigateToCheckout cũ đi
-  const navigate = useNavigate(); // 2. Khai báo hook navigate
+export default function Cart() {
+  const navigate = useNavigate();
 
   const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("mando_cart");
-    return savedCart ? JSON.parse(savedCart) : INITIAL_PRODUCTS.map(p => ({ ...p, quantity: 1, selected: true }));
+    const saved = localStorage.getItem("mando_cart");
+    return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
     localStorage.setItem("mando_cart", JSON.stringify(cart));
   }, [cart]);
 
-  // ... Các hàm updateQuantity, toggleSelectProduct, deleteProduct giữ nguyên ...
+  // ✅ TĂNG / GIẢM SỐ LƯỢNG
+  const updateQuantity = (id, delta) => {
+    setCart(prev =>
+      prev
+        .map(item =>
+          item.id === id
+            ? { ...item, quantity: item.quantity + delta }
+            : item
+        )
+        .filter(item => item.quantity > 0)
+    );
+  };
 
+  // ✅ TOGGLE CHECKBOX (FIX LỖI BẠN GẶP)
+  const toggleSelectProduct = (id) => {
+    setCart(prev =>
+      prev.map(item =>
+        item.id === id
+          ? { ...item, selected: !item.selected }
+          : item
+      )
+    );
+  };
+
+  // ✅ DELETE ITEM
+  const deleteProduct = (id) => {
+    setCart(prev => prev.filter(item => item.id !== id));
+  };
+
+  // ✅ SELECTED ITEMS
   const selectedItems = cart.filter(item => item.selected);
-  const subTotal = selectedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-  // 3. Cập nhật hàm xử lý khi nhấn nút tiến hành thanh toán
+  const subTotal = selectedItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  // ✅ CHUYỂN SANG CHECKOUT (QUAN TRỌNG)
   const handleProceedCheckout = () => {
     if (selectedItems.length === 0) {
-      alert("Vui lòng chọn ít nhất một sản phẩm để tiến hành thanh toán!");
+      alert("Vui lòng chọn sản phẩm!");
       return;
     }
-    // Chuyển hướng sang router /checkout
-    navigate("/checkout"); 
-  }
 
+    localStorage.setItem("mando_checkout", JSON.stringify(selectedItems));
+    navigate("/checkout");
+  };
   return (
     <div className="bg-[#f4f4f4] min-h-screen flex items-start justify-center py-8 font-sans antialiased text-gray-900">
       <main className="max-w-[1100px] w-full px-4">

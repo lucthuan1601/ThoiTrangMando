@@ -59,8 +59,8 @@ export default function CheckOut() {
   const [orderId, setOrderId] = useState("");
   
   const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("mando_cart");
-    return savedCart ? JSON.parse(savedCart) : [];
+    const checkout = localStorage.getItem("mando_checkout");
+    return checkout ? JSON.parse(checkout) : [];
   });
 
   const [form, setForm] = useState({ 
@@ -269,10 +269,11 @@ export default function CheckOut() {
               <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100">
                 <button className="flex-1 py-3 bg-black hover:bg-gray-900 text-white text-xs font-bold uppercase tracking-widest rounded-none transition-all">THEO DÕI ĐƠN HÀNG</button>
                 <button 
-                  onClick={() => { 
-                    localStorage.removeItem("mando_cart"); 
-                    navigate("/"); 
-                  }} 
+                  onClick={() => {
+                    localStorage.removeItem("mando_cart");
+                    localStorage.removeItem("mando_checkout");
+                    navigate("/");
+                  }}
                   className="flex-1 py-3 border border-gray-300 text-gray-700 hover:bg-gray-50 text-xs font-bold uppercase tracking-widest rounded-none transition-all"
                 >
                   TIẾP TỤC MUA SẮM
