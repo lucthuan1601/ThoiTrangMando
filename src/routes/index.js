@@ -6,6 +6,10 @@ import PantsPage from "@/pages/PantsPage";
 import ShirtPage from "@/pages/ShirtPage";
 import Cart from "@/pages/payment/Cart";
 
+// Lục thuận thêm phần này
+import SearchPage from "@/pages/SearchPage";
+//---------------------------------
+
 
 // Những trang có thể vào mà không cần đăng nhập
 const publicRoutes = [
@@ -14,14 +18,16 @@ const publicRoutes = [
     { path: '/pants', component: PantsPage, label: 'Quần' },
     { path: '/accessories', component: AccessoriesPage, label: 'Phụ kiện' },
     { path: '/new-collection', component: NewCollectionPage, label: 'Bộ sưu tập mới' },
-    { path: '/checkout', component: CheckOut},
-    { path: '/cart', component: Cart},
 
+    // Lục thuận thêm phần này
+    {
+        path: "/search",
+        component: SearchPage,
+    }
+    // ------------------------
 ];
 
 // Những trang cần đăng nhập mới vào được;
-const privateRoutes = [
-    
-];
+const privateRoutes = [];
 
 export { publicRoutes, privateRoutes };

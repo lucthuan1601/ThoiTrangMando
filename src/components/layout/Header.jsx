@@ -1,9 +1,14 @@
-import { NavLink } from "react-router-dom";
+//import { NavLink } from "react-router-dom";
 import CartIcon from "@/assets/icons/CartIcon";
 import UserIcon from "@/assets/icons/UserIcon";
 import BellIcon from "@/assets/icons/BellIcon";
 import SearchIcon from "@/assets/icons/SearchIcon";
 import { publicRoutes } from "@/routes";
+
+// Lục Thuận thêm phần này 
+import React, { useState } from "react"; // Thêm useState
+import { NavLink, useNavigate } from "react-router-dom"; // Thêm useNavigate để chuyển trang
+//--------------------------
 
 const navItems = publicRoutes
     .filter((route) => route.path !== "/")
@@ -13,6 +18,26 @@ const navItems = publicRoutes
     }));
 
 export default function Header() {
+
+    // Lục Thuận thêm phần này
+    // 1. Khai báo state quản lý giá trị ô nhập tìm kiếm
+    const [searchQuery, setSearchQuery] = useState("");
+    const navigate = useNavigate();
+
+    // 2. Hàm xử lý khi người dùng nhấn Enter trong ô nhập dữ liệu
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            const trimmedQuery = searchQuery.trim();
+            if (trimmedQuery) {
+                // Điều hướng sang trang /search kèm từ khóa truy vấn ?q=
+                navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`);
+            }
+        }
+    };
+
+    // ------------------------------------------------
+
+
     const linkClass = ({ isActive }) =>
         [
             "relative text-[14px] font-medium transition-all duration-200",
@@ -45,14 +70,21 @@ export default function Header() {
                 </nav>
 
                 <div className="flex items-center gap-4 lg:gap-6">
+
+                {/* Lục Thuận thêm phần này */}
+                    {/* Phần tìm kiếm cải tiến */}
                     <div className="hidden h-11 w-55 items-center border border-zinc-300 bg-zinc-100/80 pl-3 pr-4 lg:flex">
                         <SearchIcon />
                         <input
                             type="text"
                             placeholder="Tìm kiếm..."
-                            className="w-full bg-transparent text-sm outline-none placeholder:text-zinc-500"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)} // Cập nhật từ khóa realtime
+                            onKeyDown={handleKeyDown} // Bắt sự kiện khi gõ phím Enter
+                            className="w-full bg-transparent text-sm outline-none placeholder:text-zinc-500 ml-1"
                         />
                     </div>
+                {/* ----------------------------------------- */}
 
                     <button>
                         <CartIcon />
@@ -64,6 +96,8 @@ export default function Header() {
                         <BellIcon />
                     </button>
                 </div>
+
+
             </div>
         </header>
     );
