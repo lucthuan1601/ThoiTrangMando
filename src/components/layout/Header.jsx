@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+//import { NavLink } from "react-router-dom";
 import CartIcon from "@/assets/icons/CartIcon";
 import UserIcon from "@/assets/icons/UserIcon";
 import BellIcon from "@/assets/icons/BellIcon";
