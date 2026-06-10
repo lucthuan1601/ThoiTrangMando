@@ -1,22 +1,27 @@
 import AccessoriesPage from "@/pages/AccessoriesPage";
+import CheckOut from "@/pages/payment/CheckOut";
 import HomePage from "@/pages/HomePage";
 import NewCollectionPage from "@/pages/NewCollectionPage";
 import PantsPage from "@/pages/PantsPage";
 import ShirtPage from "@/pages/ShirtPage";
+import Cart from "@/pages/payment/Cart";
 
 
 // Những trang có thể vào mà không cần đăng nhập
 const publicRoutes = [
-    { path: '/', component: HomePage, label: 'Trang chủ' },
+    { path: '/', component: HomePage, label: 'Trang chủ' }, 
     { path: '/shirt', component: ShirtPage, label: 'Áo' },
     { path: '/pants', component: PantsPage, label: 'Quần' },
     { path: '/accessories', component: AccessoriesPage, label: 'Phụ kiện' },
-    { path: '/new-collection', component: NewCollectionPage, label: 'Bộ sưu tập mới' }
+    { path: '/new-collection', component: NewCollectionPage, label: 'Bộ sưu tập mới' },
+    { path: '/checkout', component: CheckOut},
+    { path: '/cart', component: Cart},
+
 ];
 
 // Những trang cần đăng nhập mới vào được;
 const privateRoutes = [
-
+    
 ];
 
 export { publicRoutes, privateRoutes };
