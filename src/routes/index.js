@@ -26,6 +26,11 @@ const publicRoutes = [
     component: ProductDetailPage,
     label: "Chi tiết sản phẩm",
   },
+  {
+    path: "/orders",
+    component: OrdersPage,
+    label: "Đơn hàng của bạn",
+  },
 ];
 
 // Những trang cần đăng nhập mới vào được;
