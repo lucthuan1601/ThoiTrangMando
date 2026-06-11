@@ -7,7 +7,8 @@ import ProductDetailPage from "@/pages/ProductDetailPage";
 import ShirtPage from "@/pages/ShirtPage";
 import CartPage from "@/pages/CartPage";
 import SearchPage from "@/pages/SearchPage";
-import OrdersPage from "@/pages/Orders";
+import OrdersPage from "@/pages/OrdersPage";
+import AccountPage from "@/pages/AccountPage";
 
 // Những trang có thể vào mà không cần đăng nhập
 const publicRoutes = [
@@ -19,12 +20,15 @@ const publicRoutes = [
     { path: '/cart', component: CartPage},
     { path: '/checkout', component: CheckOut},
     { path: '/product/:id', component: ProductDetailPage },
+    { path: '/account', component: AccountPage },
+
+    
     // Lục thuận thêm phần này
     {
         path: "/search",
         component: SearchPage,
     },
-     { path: "/orders", component: OrdersPage, label: "Đơn hàng" },
+     { path: "/orders", component: OrdersPage },
     // ------------------------
 ];
 

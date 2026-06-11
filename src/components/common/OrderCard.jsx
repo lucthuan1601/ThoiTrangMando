@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ORDER_STATUS } from "../../utils/orderStatus";
-import { formatCurrency, formatDate } from "../../utils/formatCurrency";
-import CancelOrderModal from "../specific/CancelOrderModal";
-import ReviewModal from "../specific/ReviewModal";
+import { ORDER_STATUS } from "@/utils/orderStatus";
+import { formatCurrency, formatDate } from "@/utils/formatCurrency";
+import CancelOrderModal from "@/components/specific/CancelOrderModal";
+import ReviewModal from "@/components/specific/ReviewModal";
 
 const OrderCard = ({ order, onCancel, onReview }) => {
   const [showCancel, setShowCancel] = useState(false);
@@ -27,24 +27,44 @@ const OrderCard = ({ order, onCancel, onReview }) => {
         <div className="order-card__header">
           <div className="order-card__id-row">
             <div className="order-card__icon">
-              <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                viewBox="0 0 24 24"
+              >
                 {order.status === "dang_giao" ? (
-                  <><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></>
+                  <>
+                    <rect x="1" y="3" width="15" height="13" />
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                    <circle cx="5.5" cy="18.5" r="2.5" />
+                    <circle cx="18.5" cy="18.5" r="2.5" />
+                  </>
                 ) : (
-                  <><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></>
+                  <>
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <path d="M8 21h8M12 17v4" />
+                  </>
                 )}
               </svg>
             </div>
             <div>
               <p className="order-card__id">ĐƠN HÀNG #{order.id}</p>
-              <p className="order-card__date">Đặt ngày {formatDate(order.date)}</p>
+              <p className="order-card__date">
+                Đặt ngày {formatDate(order.date)}
+              </p>
             </div>
           </div>
           <span
             className="order-card__status"
             style={{ color: status.color, backgroundColor: status.bg }}
           >
-            <span className="order-card__status-dot" style={{ background: status.dot }} />
+            <span
+              className="order-card__status-dot"
+              style={{ background: status.dot }}
+            />
             {status.label.toUpperCase()}
           </span>
         </div>
@@ -64,7 +84,9 @@ const OrderCard = ({ order, onCancel, onReview }) => {
                 <p className="order-card__item-meta">
                   Size: {item.size} | Số lượng: {item.quantity}
                 </p>
-                <p className="order-card__item-price">{formatCurrency(item.price * item.quantity)}</p>
+                <p className="order-card__item-price">
+                  {formatCurrency(item.price * item.quantity)}
+                </p>
               </div>
             </div>
           ))}
@@ -89,7 +111,10 @@ const OrderCard = ({ order, onCancel, onReview }) => {
         <div className="order-card__actions">
           {order.status === "da_danh_gia" && order.rating && (
             <div className="order-card__reviewed">
-              <span>{"★".repeat(order.rating)}{"☆".repeat(5 - order.rating)}</span>
+              <span>
+                {"★".repeat(order.rating)}
+                {"☆".repeat(5 - order.rating)}
+              </span>
               <span>Đã đánh giá</span>
             </div>
           )}

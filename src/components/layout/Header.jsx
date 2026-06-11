@@ -7,7 +7,7 @@ import { publicRoutes } from "@/routes";
 
 // Đức thêm
 import { useCart } from "@/context/CartContext"; // 1. Import hook useCart để lấy dữ liệu số lượng
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const navItems = publicRoutes
   .filter((route) => route.path !== "/" && route.path !== "/cart")
@@ -79,7 +79,9 @@ export default function Header() {
             </div>
           </NavLink>
           <button>
-            <UserIcon />
+              <Link  to="/orders">
+                <UserIcon />
+              </Link>
           </button>
           <button>
             <BellIcon />

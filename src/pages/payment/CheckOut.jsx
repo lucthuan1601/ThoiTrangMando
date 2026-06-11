@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const QrIcon = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -96,19 +96,66 @@ export default function CheckOut() {
   const handleChange = f => e => setForm(p => ({ ...p, [f]: e.target.value }));
   const handleBlur = f => () => setTouched(p => ({ ...p, [f]: true }));
 
+  const saveOrder = (orderCode) => {
+    const oldOrders = JSON.parse(
+        localStorage.getItem("mando_orders") || "[]"
+    );
+
+    const newOrder = {
+        id: orderCode,
+        date: new Date().toLocaleString("vi-VN"),
+        status: "da_nhan",
+
+        customer: {
+            name: form.name,
+            phone: form.phone,
+            address: form.addr,
+            note: form.note,
+        },
+
+        items: selectedItems,
+
+        total: totalAmount,
+
+        paymentMethod: payMethod,
+    };
+
+    localStorage.setItem(
+        "mando_orders",
+        JSON.stringify([newOrder, ...oldOrders])
+    );
+  };
+
+
   const handleOrder = () => {
     if (selectedItems.length === 0) {
-      alert("Đơn hàng trống hoặc chưa có sản phẩm nào được chọn!");
-      return;
+        alert("Đơn hàng trống hoặc chưa có sản phẩm nào được chọn!");
+        return;
     }
+
     setTouched({ name: true, phone: true, addr: true });
-    if (["name", "phone", "addr"].some(f => validators[f](form[f]))) return;
-    
-    setOrderId("MND-" + Math.floor(100000 + Math.random() * 900000));
-    payMethod === "qr" ? setShowQR(true) : setScreen("success");
+
+    if (["name", "phone", "addr"].some(f => validators[f](form[f]))) {
+        return;
+    }
+
+    const code =
+        "MND-" +
+        Math.floor(100000 + Math.random() * 900000);
+
+    setOrderId(code);
+
+    if (payMethod === "qr") {
+        setShowQR(true);
+    } else {
+        saveOrder(code);
+        setScreen("success");
+    }
   };
 
   const confirmPayment = () => {
+    saveOrder(orderId);
+
     setShowQR(false);
     setScreen("success");
   };
@@ -267,7 +314,14 @@ export default function CheckOut() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100">
-                <button className="flex-1 py-3 bg-black hover:bg-gray-900 text-white text-xs font-bold uppercase tracking-widest rounded-none transition-all">THEO DÕI ĐƠN HÀNG</button>
+                <button 
+                  className="flex-1 py-3 bg-black hover:bg-gray-900 text-white text-xs font-bold uppercase tracking-widest rounded-none transition-all"
+                                  
+                >
+                  <Link  to="/orders">
+                    THEO DÕI ĐƠN HÀNG
+                  </Link>
+                </button>
                 <button 
                   onClick={() => {
                     localStorage.removeItem("mando_cart");
