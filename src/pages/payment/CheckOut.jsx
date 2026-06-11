@@ -104,7 +104,7 @@ export default function CheckOut() {
     const newOrder = {
         id: orderCode,
         date: new Date().toLocaleString("vi-VN"),
-        status: "da_nhan",
+        status: "cho_xac_nhan",
 
         customer: {
             name: form.name,
