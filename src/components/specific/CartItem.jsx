@@ -1,5 +1,4 @@
 // src/components/specific/CartItem.jsx
-import React from "react";
 import { useCart } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/formatCurrency";
 

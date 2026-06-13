@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { PRODUCTS } from "@/data/product";
 

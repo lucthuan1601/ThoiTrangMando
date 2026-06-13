@@ -1,5 +1,5 @@
 // src/components/specific/CartSummary.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useCart } from "../../context/CartContext";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useNavigate } from "react-router-dom";

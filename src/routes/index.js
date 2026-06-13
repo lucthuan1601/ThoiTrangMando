@@ -12,24 +12,17 @@ import AccountPage from "@/pages/AccountPage";
 
 // Những trang có thể vào mà không cần đăng nhập
 const publicRoutes = [
-    { path: '/', component: HomePage, label: 'Trang chủ' }, 
-    { path: '/shirt', component: ShirtPage, label: 'Áo' },
-    { path: '/pants', component: PantsPage, label: 'Quần' },
-    { path: '/accessories', component: AccessoriesPage, label: 'Phụ kiện' },
-    { path: '/new-collection', component: NewCollectionPage, label: 'Bộ sưu tập mới' },
-    { path: '/cart', component: CartPage},
-    { path: '/checkout', component: CheckOut},
-    { path: '/product/:id', component: ProductDetailPage },
-    { path: '/account', component: AccountPage },
-
-    
-    // Lục thuận thêm phần này
-    {
-        path: "/search",
-        component: SearchPage,
-    },
-     { path: "/orders", component: OrdersPage },
-    // ------------------------
+    { path: "/", component: HomePage, label: "Trang chủ" },
+    { path: "/shirt", component: ShirtPage, label: "Áo" },
+    { path: "/pants", component: PantsPage, label: "Quần" },
+    { path: "/accessories", component: AccessoriesPage, label: "Phụ kiện" },
+    { path: "/new-collection", component: NewCollectionPage, label: "Bộ sưu tập mới" },
+    { path: "/cart", component: CartPage },
+    { path: "/checkout", component: CheckOut },
+    { path: "/product/:id", component: ProductDetailPage },
+    { path: "/account", component: AccountPage },
+    { path: "/search", component: SearchPage },
+    { path: "/orders", component: OrdersPage },
 ];
 
 // Những trang cần đăng nhập mới vào được;

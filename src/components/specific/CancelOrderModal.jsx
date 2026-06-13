@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { cancelReasons } from "../../data/mockOrders";
 import { formatCurrency } from "../../utils/formatCurrency";
 

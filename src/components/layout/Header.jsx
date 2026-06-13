@@ -17,7 +17,7 @@ const navItems = publicRoutes
   }));
 
 export default function Header() {
-  const { totalItemsCount } = useCart(); // 2. Lấy số lượng sản phẩm tổng cục từ Context
+  const { cartCount } = useCart(); // 2. Lấy số lượng sản phẩm tổng cục từ Context
   const navigate = useNavigate();
   const linkClass = ({ isActive }) =>
     [
@@ -71,9 +71,9 @@ export default function Header() {
               <CartIcon />
 
               {/* 4. Logic hiển thị chấm đỏ: Chỉ render khi số lượng > 0 */}
-              {totalItemsCount > 0 && (
+              {cartCount > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white antialiased">
-                  {totalItemsCount}
+                  {cartCount}
                 </span>
               )}
             </div>
