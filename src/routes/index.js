@@ -31,11 +31,14 @@ const publicRoutes = [
     component: OrdersPage,
     label: "Đơn hàng của bạn",
   },
+  {
+    path: "/track-order",
+    component: TrackOrderPage,
+    label: "Chi tiết đơn hàng",
+  },
 ];
 
 // Những trang cần đăng nhập mới vào được;
-const privateRoutes = [
-  { path: "/orders", component: OrdersPage, label: "Đơn hàng" },
-];
+const privateRoutes = [];
 
 export { publicRoutes, privateRoutes };
