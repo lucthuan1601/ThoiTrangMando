@@ -16,11 +16,11 @@ function HomePage() {
                 <div className="absolute inset-0 bg-black/20" />
 
                 <div className="absolute left-10 top-1/2 max-w-xl -translate-y-1/2">
-                    <h1 className="text-6xl font-bold text-black">
+                    <h1 className="text-6xl font-bold text-white">
                         The Editorial Collection.
                     </h1>
 
-                    <p className="mt-6 text-lg text-black">
+                    <p className="mt-6 text-lg text-white">
                         Defining modern minimalism through architectural
                         silhouettes and premium Vietnamese craftsmanship.
                     </p>

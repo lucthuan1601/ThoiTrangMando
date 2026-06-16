@@ -41,7 +41,7 @@ export default function Header() {
 
         <nav className="hidden items-center gap-8 lg:flex">
           <NavLink to="/" className={linkClass}>
-            Trang chủ
+            TRANG CHỦ
           </NavLink>
           {navItems.map((item) => (
             <NavLink key={item.to} to={item.to} className={linkClass}>
